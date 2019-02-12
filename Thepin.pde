@@ -6,7 +6,7 @@ int numPins = numSlots2/100;
 
 fallingBall bob = new fallingBall();
 ArrayList<collisionBalls> dude = new ArrayList<collisionBalls>();
-pins[] pinner = new pins[numPins];
+//pins[] pinner = new pins[numPins];
 public void setup() {
   size(1000, 1000);
   for (int x = 0; x <= numSlots1; x+=100) { // creates a grid of balls
@@ -20,9 +20,9 @@ public void setup() {
     }
   }
   
-  for(int i = 0; i < pinner.length; i++) {
+  /*for(int i = 0; i < pinner.length; i++) {
     pinner[i] = new pins(500, 900); // creating pins 
-  }
+  }*/
   
 }
 
@@ -128,7 +128,7 @@ class collisionBalls {
 
 
 
-class pins {
+/*class pins {
   
   private int x, y, r;
   private int randomNum;
@@ -150,7 +150,7 @@ class pins {
     
   }
   
-  public int getRand() { return randomNum;} 
+  public int getRand() { return randomNum;} */
   
 }
     
