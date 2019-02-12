@@ -150,7 +150,7 @@ class collisionBalls {
     
   }
   
-  public int getRand() { return randomNum;} */
+  public int getRand() { return randomNum;} 
   
-}
+}*/
     
