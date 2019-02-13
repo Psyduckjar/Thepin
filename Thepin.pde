@@ -2,11 +2,11 @@ int sizeX = 1000;
 int sizeY = 1000;
 int numSlots1 = 500;
 int numSlots2 = 600;
-int numPins = numSlots2/100;
+int numPins = numSlots2/10;
 
 fallingBall bob = new fallingBall();
 ArrayList<collisionBalls> dude = new ArrayList<collisionBalls>();
-//pins[] pinner = new pins[numPins];
+pins[] pinner = new pins[numPins];
 public void setup() {
   size(1000, 1000);
   for (int x = 0; x <= numSlots1; x+=100) { // creates a grid of balls
@@ -20,9 +20,10 @@ public void setup() {
     }
   }
   
-  /*for(int i = 0; i < pinner.length; i++) {
-    pinner[i] = new pins(500, 900); // creating pins 
-  }*/
+  for(int i = 0; i < pinner.length; i++) {
+    pinner[i] = new pins(200, 850);
+		// creating pins 
+  }
   
 }
 
@@ -38,7 +39,13 @@ public void draw() {
       changeMove = true;
     }
   }
-
+for(int i = 0; i < pinner.length; i++) {
+	pinner[i].show();
+}
+	
+	
+	
+	
   if (changeMove) {
     bob.setY(0.8);
     bob.move();
@@ -128,7 +135,7 @@ class collisionBalls {
 
 
 
-/*class pins {
+class pins {
   
   private int x, y, r;
   private int randomNum;
@@ -142,15 +149,13 @@ class collisionBalls {
   
   
   public void show() {
-  //two lines on each side
-  // a rectangle base
-  // a transparent number
-  rect(x, y*2,x + r, y + r);
+  stroke(0,255,0);
+	line(x,y,x, y + 10);	
+  rect(x, y + r * 2, 100 , 10);
+  line(x + 100, y , x + 100, y + 10);
   
-    
   }
   
   public int getRand() { return randomNum;} 
   
-}*/
-    
+}
