@@ -3,6 +3,7 @@ int sizeY = 1000;
 int numSlots1 = 500;
 int numSlots2 = 600;
 int numPins = numSlots2/10;
+double gravity = 0.8;
 
 fallingBall bob = new fallingBall();
 ArrayList<collisionBalls> dude = new ArrayList<collisionBalls>();
@@ -33,7 +34,7 @@ public void draw() {
   for (int i = 0; i < dude.size(); i++) {
     if (dist((float)bob.getX(), (float)bob.getY(), (float)dude.get(i).getX(), (float)dude.get(i).getY()) < 20) {
       changeMove = false; //if hits ball move it to the right by 25 or to the left by 25
-      bob.setY(0);
+      bob.setGravity(0);
       bob.move2();
     } else {
       changeMove = true;
@@ -47,7 +48,7 @@ for(int i = 0; i < pinner.length; i++) {
 	
 	
   if (changeMove) {
-    bob.setY(0.8);
+    bob.setGravity(gravity);
     bob.move();
   }
   //set Y value to 0 if the circle touches the other one yoooooo fire emoji
@@ -60,18 +61,21 @@ for(int i = 0; i < pinner.length; i++) {
   }
 }
 
-
+//fix gravityE and gravity on draw and fallingball
 
 class fallingBall {
   private double gravity;
   private double x, y, r;
   private int change;
+
   public fallingBall() {
-    gravity = 0.8;
+    
+		gravity = 0.8;
     x = sizeX/2;
     y = sizeY/4 - 100;
     r = 25;
     change = 50;
+		
   }
   public fallingBall(int a, int s, int d) {
     gravity = 0.8;
@@ -111,9 +115,10 @@ class fallingBall {
   public double getX() { 
     return x;
   }
-  public void setY(double Y) { 
+  public void setGravity(double Y) { 
     gravity = Y;
   }
+  public double getGravity() { return gravity; }
 }
 
 class collisionBalls {
@@ -150,9 +155,10 @@ class pins {
   
   public void show() {
   stroke(0,255,0);
-	line(x,y,x, y + 10);	
+	line(x,y,x, y + 95);	
   rect(x, y + r * 2, 100 , 10);
-  line(x + 100, y , x + 100, y + 10);
+  line(x + 100, y , x + 100, y + 95);
+		
   
   }
   
