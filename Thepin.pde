@@ -1,13 +1,13 @@
-int sizeX = 1000;
-int sizeY = 1000;
-int numSlots1 = 500;
-int numSlots2 = 600;
-int numPins = numSlots2/10;
-double gravity = 0.8;
+int sizeX = 1000; //size of the canvas
+int sizeY = 1000; //size of the canvas
+int numSlots1 = 500; // static ball limit (goes by hundreds)
+int numSlots2 = 600; // static ball limit (goes by hundreds)
+int numPins = numSlots2/100; // should give you the number of pins based off the num of Slots
+double gravity = 0.8; // global gravity var
 
-fallingBall bob = new fallingBall();
-ArrayList<collisionBalls> dude = new ArrayList<collisionBalls>();
-pins[] pinner = new pins[numPins];
+fallingBall bob = new fallingBall(); //creates the falling ball
+ArrayList<collisionBalls> dude = new ArrayList<collisionBalls>(); // creates an array of the static balls
+pins[] pinner = new pins[numPins]; // creates pins ( dependent on numSlots )
 public void setup() {
   size(1000, 1000);
   for (int x = 0; x <= numSlots1; x+=100) { // creates a grid of balls
@@ -21,15 +21,16 @@ public void setup() {
     }
   }
   
-  for(int i = 0; i < pinner.length; i++) {
-    pinner[i] = new pins(200, 850);
-		// creating pins 
+  for(int i = 0; i < pinner.length; i++) {   //creates pins based off the number of static balls
+    pinner[i] = new pins(i * 100 + 200, 850);
+    // creating pins 
   }
   
 }
 
 public void draw() {
   background(255);
+  //COLLISION WITH FALLINGBALL AND STATIC BALLS 
   boolean changeMove = true;
   for (int i = 0; i < dude.size(); i++) {
     if (dist((float)bob.getX(), (float)bob.getY(), (float)dude.get(i).getX(), (float)dude.get(i).getY()) < 20) {
@@ -41,20 +42,26 @@ public void draw() {
     }
   }
 for(int i = 0; i < pinner.length; i++) {
-	pinner[i].show();
+  pinner[i].show();
 }
-	
-	
-	
-	
+  
+  //COLLISION WITH FALLINGBALL AND PINSLOTS
+  for (int i =0; i < pinner.length; i++) {
+    if(dist((float)bob.getX(), (float)bob.getY(), pinner[i].getY(), pinner[i].getY()) < 20) {
+      changeMove = false;
+      bob.setGravity(0);
+      text("Your ball landed on..." + pinner[i].getRand(), 10, 50);
+    }
+  }
+  
+  
+  
+  
   if (changeMove) {
     bob.setGravity(gravity);
     bob.move();
   }
-  //set Y value to 0 if the circle touches the other one yoooooo fire emoji
-  // falls down, if it touches a circle, stop, move either to the right or left , repeat
-  // make sure it doesnt go over the border(create boundries)
-  // create the slots
+  // redraw when click
   bob.show();
   for (int i = 0; i < dude.size(); i++) {
     dude.get(i).show();
@@ -70,12 +77,12 @@ class fallingBall {
 
   public fallingBall() {
     
-		gravity = 0.8;
+    gravity = 0.8;
     x = sizeX/2;
     y = sizeY/4 - 100;
     r = 25;
     change = 50;
-		
+    
   }
   public fallingBall(int a, int s, int d) {
     gravity = 0.8;
@@ -155,13 +162,15 @@ class pins {
   
   public void show() {
   stroke(0,255,0);
-	line(x,y,x, y + 95);	
+  line(x,y ,x, y + 95);  
   rect(x, y + r * 2, 100 , 10);
-  line(x + 100, y , x + 100, y + 95);
-		
-  
+  line(x + 100, y, x + 100, y + 95);
+    textSize(32);
+    text(randomNum, x + 20, y + 50);
+    fill(0,255,0);
   }
   
+  public int getY() { return y; }
   public int getRand() { return randomNum;} 
   
 }
