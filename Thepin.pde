@@ -3,7 +3,7 @@ int sizeY = 1000; //size of the canvas
 int numSlots1 = 500; // static ball limit (goes by hundreds)
 int numSlots2 = 600; // static ball limit (goes by hundreds)
 int numPins = numSlots2/100; // should give you the number of pins based off the num of Slots
-double gravity = 4; // global gravity var
+double gravity = 0.8; // global gravity var
 
 fallingBall bob = new fallingBall(); //creates the falling ball
 ArrayList<collisionBalls> dude = new ArrayList<collisionBalls>(); // creates an array of the static balls
