@@ -47,7 +47,7 @@ for(int i = 0; i < pinner.length; i++) {
       
   //COLLISION WITH FALLINGBALL AND PINSLOTS
   for (int i =0; i < pinner.length; i++) {
-    if(dist(bob.getX(), bob.getY(), (float)pinner[i].getX(), (float)pinner[i].getY()) < 20) {
+    if(dist((float)bob.getX(), (float)bob.getY(), (float)pinner[i].getX(), (float)pinner[i].getY()) < 20) {
       changeMove = false; // sets it false so it doesnt constantly change the gravity back to its original
       bob.setGravity(0); // stops the ball from moving downwards
       text("Your ball landed on..." + pinner[i].getRand(), 10, 100); // a text that will show you the number that it landed on 
@@ -96,18 +96,20 @@ class fallingBall {
     }
   }
 
-  public void move2() {
+  public void move2() { //moves the ball left or right depending on chance
     double randomChance = Math.random();
    // this determines wether the ball will move left or right with a 50 percent chance
-      if (randomChance >= .5) {
+      if (randomChance > .5) { 
         x-=change;
       } else {
         x+=change;
       }
-    if(x <= 200) {
+    if(x <= 150) {
+      x+=change;
       x+=change;
     }
-    if(x >= 600) {
+    if(x >= 850) {
+      x-=change;
       x-=change;
     }
     
@@ -122,13 +124,20 @@ class fallingBall {
   public double getX() { 
     return x;
   }
+  public void setY(double t) { //sets y value (for mousepressed)
+    y = t;
+  }   
+  public void setX(double lol) { //sets x value (for mousepressed)
+    x = lol;
+  }
+ 
   public void setGravity(double Y) { 
     gravity = Y;
   }
   public double getGravity() { return gravity; }
 }
 
-class collisionBalls {
+class collisionBalls { //creates the static balls
   private int x, y;
   public int getX() { 
     return x;
@@ -147,7 +156,7 @@ class collisionBalls {
 
 
 
-class pins {
+class pins { //creates pins with the random texts in each of them
   
   private int x, y, r;
   private int randomNum;
@@ -175,5 +184,16 @@ class pins {
   public int getX() { return x + 50; }
   public int getY() { return rectY; }
   public int getRand() { return randomNum;} 
+  public void setRand(int x) { randomNum = x; }
   
+}
+
+
+public void mousePressed() {
+  
+  bob.setY(sizeY/4 - 100);
+  bob.setX(sizeX/2);
+  for(int i = 0; i < pinner.length; i++) {
+    pinner[i].setRand((int)(Math.random()*100));
+  }
 }
