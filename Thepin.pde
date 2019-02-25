@@ -20,12 +20,11 @@ public void setup() {
       dude.add(new collisionBalls( 200 + x, 250 +y));
     }
   }
-  
-  for(int i = 0; i < pinner.length; i++) {   //creates pins based off the number of static balls
+
+  for (int i = 0; i < pinner.length; i++) {   //creates pins based off the number of static balls
     pinner[i] = new pins(i * 100 + 200, 850);
-    // creating pins 
+    // creating pins
   }
-  
 }
 
 public void draw() {
@@ -41,27 +40,27 @@ public void draw() {
       changeMove = true;
     }
   }
-for(int i = 0; i < pinner.length; i++) {
-  pinner[i].show(); // creates slots
-}
-      
+  for (int i = 0; i < pinner.length; i++) {
+    pinner[i].show(); // creates slots
+  }
+
   //COLLISION WITH FALLINGBALL AND PINSLOTS
   for (int i =0; i < pinner.length; i++) {
-    if(dist((float)bob.getX(), (float)bob.getY(), (float)pinner[i].getX(), (float)pinner[i].getY()) < 20) {
+    if (dist((float)bob.getX(), (float)bob.getY(), (float)pinner[i].getX(), (float)pinner[i].getY()) < 20) {
       changeMove = false; // sets it false so it doesnt constantly change the gravity back to its original
       bob.setGravity(0); // stops the ball from moving downwards
-      text("Your ball landed on..." + pinner[i].getRand(), 10, 100); // a text that will show you the number that it landed on 
-		} 
-	}
-  
-  
-  
-  
+      text("Your ball landed on..." + pinner[i].getRand(), 10, 100); // a text that will show you the number that it landed on
+    }
+  }
+
+
+
+
   if (changeMove) { //when true, will set the gravity to the global variable "gravity"
     bob.setGravity(gravity); //this logic allows the ball to move constantly when nothing is touching it
     bob.move(); // implements the ball to move with the gravity given
   }
-  
+
   bob.show(); // shows the falling ball
   for (int i = 0; i < dude.size(); i++) {
     dude.get(i).show(); //shows the static balls
@@ -76,13 +75,12 @@ class fallingBall {
   private int change;
 
   public fallingBall() {
-    
+
     gravity = 0.8; //initializing...
     x = sizeX/2;
     y = sizeY/4 - 100;
     r = 25;
     change = 50;
-    
   }
   public fallingBall(int a, int s, int d) { //This is an unnecessary (provisional) argument constructer that would be used to make multiple falling balls
     gravity = 0.8; 
@@ -98,21 +96,20 @@ class fallingBall {
 
   public void move2() { //moves the ball left or right depending on chance
     double randomChance = Math.random();
-   // this determines wether the ball will move left or right with a 50 percent chance
-      if (randomChance > .5) { 
-        x-=change;
-      } else {
-        x+=change;
-      }
-    if(x <= 150) {
+    // this determines wether the ball will move left or right with a 50 percent chance
+    if (randomChance > .5) { 
+      x-=change;
+    } else {
+      x+=change;
+    }
+    if (x <= 150) {
       x+=change;
       x+=change;
     }
-    if(x >= 850) {
+    if (x >= 850) {
       x-=change;
       x-=change;
     }
-    
   }
 
   public void show() { //a function to show the ball
@@ -130,11 +127,13 @@ class fallingBall {
   public void setX(double lol) { //sets x value (for mousepressed)
     x = lol;
   }
- 
+
   public void setGravity(double Y) { 
     gravity = Y;
   }
-  public double getGravity() { return gravity; }
+  public double getGravity() { 
+    return gravity;
+  }
 }
 
 class collisionBalls { //creates the static balls
@@ -157,43 +156,56 @@ class collisionBalls { //creates the static balls
 
 
 class pins { //creates pins with the random texts in each of them
-  
+
   private int x, y, r;
   private int randomNum;
   private int rectY;
-  public pins() { return;}
+  public pins() { 
+    return;
+  }
   public pins(int a, int b) {
     x = a;
     y = b;
     r = 50;
-		rectY = y + r * 2;
+    rectY = y + r * 2;
     randomNum =(int)(Math.random()*100);
   }
-  
-  
+
+
   public void show() {
-  
-	stroke(0,255,0);
-  line(x,y ,x, y + 95);  
-  rect(x, rectY, 100 , 10);
-  line(x + 100, y, x + 100, y + 95);
+
+    stroke(0, 255, 0);
+    line(x, y, x, y + 95);  
+    rect(x, rectY, 100, 10);
+    line(x + 100, y, x + 100, y + 95);
+    if ( randomNum >= 90) {
+      fill((int)(Math.random()*255), (int)(Math.random()*255), (int)(Math.random()*255));
+    }
+
     textSize(32);
     text(randomNum, x + 20, y + 50);
-    fill(0,255,0);
+      fill(0,255,0);
   }
-  public int getX() { return x + 50; }
-  public int getY() { return rectY; }
-  public int getRand() { return randomNum;} 
-  public void setRand(int x) { randomNum = x; }
-  
+  public int getX() { 
+    return x + 50;
+  }
+  public int getY() { 
+    return rectY;
+  }
+  public int getRand() { 
+    return randomNum;
+  } 
+  public void setRand(int x) { 
+    randomNum = x;
+  }
 }
 
 
 public void mousePressed() {
-  
+
   bob.setY(sizeY/4 - 100);
   bob.setX(sizeX/2);
-  for(int i = 0; i < pinner.length; i++) {
+  for (int i = 0; i < pinner.length; i++) {
     pinner[i].setRand((int)(Math.random()*100));
   }
 }
