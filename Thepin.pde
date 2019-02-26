@@ -1,3 +1,8 @@
+
+//The code highlighted in blue is created dependently with me and my partner Soung Son
+//The code highlighted in yellow is created independently by Soung Son
+//The code marked in oval and rectangle is created independently by Me
+
 int sizeX = 1000; //size of the canvas
 int sizeY = 1000; //size of the canvas
 int numSlots1 = 500; // static ball limit (goes by hundreds)
