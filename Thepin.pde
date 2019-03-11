@@ -49,6 +49,8 @@ public void draw() {
     pinner[i].show(); // creates slots
   }
 
+//text("numbers above 90 are very lucky!",100, 700);
+
   //COLLISION WITH FALLINGBALL AND PINSLOTS
   for (int i =0; i < pinner.length; i++) {
     if (dist((float)bob.getX(), (float)bob.getY(), (float)pinner[i].getX(), (float)pinner[i].getY()) < 20) {
