@@ -49,7 +49,7 @@ public void draw() {
     pinner[i].show(); // creates slots
   }
 
-text("numbers above 90 are very lucky!",100, 700); //text to indicate what the blinking numbers are for
+text("numbers above 90 are very lucky!",100, 200); //text to indicate what the blinking numbers are for
 
   //COLLISION WITH FALLINGBALL AND PINSLOTS
   for (int i =0; i < pinner.length; i++) {
